@@ -1,3 +1,5 @@
+@import 'src/styles';
+
 .analyser-container {
   height: 100%;
   display: flex;
@@ -7,6 +9,7 @@
     min-width: 17rem;
     width: 20vw;
     padding: 1rem;
+    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     background: white;
@@ -23,9 +26,19 @@
       }
     }
 
+    mat-list {
+      width: 100%;
+      max-height: 27rem;
+      overflow-y: auto;
+      margin-bottom: 2rem;
+      ::ng-deep .mat-list-item:nth-child(even) {
+        background: $analyser-secondary-blue;
+      }
+      ::ng-deep .mat-list-item-content {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
 
-    //mat-form-field {
-    //  margin: 1rem 0;
-    //}
   }
 }

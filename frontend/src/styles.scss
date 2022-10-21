@@ -5,6 +5,7 @@
 //$accent-dark-red: #ea2638;
 $background-global-grey: #f0f2f5;
 $analyser-primary-blue: #3f51b5;
+$analyser-secondary-blue: rgba(63, 81, 181, 0.07);
 $frontend-primary: mat.define-palette(mat.$indigo-palette);
 $frontend-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
@@ -31,6 +32,12 @@ body {
 
 .shadow {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 //.mat-button-toggle-checked {

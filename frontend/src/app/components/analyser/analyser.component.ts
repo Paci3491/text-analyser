@@ -41,6 +41,10 @@ export class AnalyserComponent implements OnInit {
     const form = this.analyserForm.value;
     this.analyserResult = this.analyserService.offlineAnalysis(form.analyserLetterType, form.input);
     this.resultShown = true
+  }
+
+  onReset() {
+    this.resultShown = false;
     this.analyserForm.reset();
   }
 
