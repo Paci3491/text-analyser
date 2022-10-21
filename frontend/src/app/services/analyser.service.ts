@@ -14,21 +14,31 @@ export class AnalyserService {
 
   constructor() { }
 
-  offlineAnalysis(letterType: AnalyserLetterTypes, input: string) {
+  offlineAnalysis(letterType: AnalyserLetterTypes, input: string): OfflineAnalysisOutput {
     const result: OfflineAnalysisOutput = {};
 
-    const charArray = [...input.toLowerCase()];
-    charArray.forEach(char => {
-      const vowelIntersection = this.VOWELS.find(item => item === char)
+    const trimmedInput = input.replace(/\s/g, '').toLowerCase();
+    const charArr = [...trimmedInput];
 
-      if (vowelIntersection && result.hasOwnProperty(char)) {
-          result[char] += 1
-      } else if (vowelIntersection) {
-        result[char] = 1
+    charArr.forEach(char => {
+      const vowelIntersection = this.VOWELS.find(item => item === char);
+
+      if (letterType === AnalyserLetterTypes.Vowels && vowelIntersection) {
+        this.createOrIncrementCharCount(result, char);
+      } else if (letterType === AnalyserLetterTypes.Consonants && !vowelIntersection) {
+        this.createOrIncrementCharCount(result, char);
       }
     })
 
-    return result
+    return result;
+  }
+
+  createOrIncrementCharCount(result: OfflineAnalysisOutput, char: string): void {
+    if (result.hasOwnProperty(char)) {
+      result[char] += 1
+    } else {
+      result[char] = 1
+    }
   }
 
 }

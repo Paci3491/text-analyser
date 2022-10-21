@@ -22,27 +22,29 @@ export class AnalyserComponent implements OnInit {
   analyserStates = AnalyserNetworkStates;
   analyserLetterTypes = AnalyserLetterTypes;
   resultShown = false;
-  analyserResult: OfflineAnalysisOutput | undefined;
+  analyserResult: OfflineAnalysisOutput = {};
 
   analyserForm: FormGroup;
 
   constructor(private analyserService: AnalyserService) {
     this.analyserForm = new FormGroup({
-      analyserNetworkState: new FormControl(null, Validators.required),
-      analyserLetterType: new FormControl(null, Validators.required),
-      input: new FormControl(null, Validators.required)
+      analyserNetworkState: new FormControl(AnalyserNetworkStates.Offline),
+      analyserLetterType: new FormControl(AnalyserLetterTypes.Vowels),
+      input: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z\s]*$/)])
     })
   }
 
   ngOnInit(): void {
-    this.initForm();
   }
-
-  initForm() {}
 
   onSubmit() {
-    this.analyserResult = this.analyserService.offlineAnalysis(this.analyserForm.value.analyserLetterType, this.analyserForm.value.input);
+    const form = this.analyserForm.value;
+    this.analyserResult = this.analyserService.offlineAnalysis(form.analyserLetterType, form.input);
     this.resultShown = true
+    this.analyserForm.reset();
   }
 
+  get emptyAnalyserResult() {
+    return Object.keys(this.analyserResult).length < 1
+  }
 }

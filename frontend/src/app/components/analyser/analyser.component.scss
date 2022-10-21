@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  .analyser {
+  .card {
     min-width: 17rem;
     width: 20vw;
     padding: 1rem;
@@ -11,17 +11,21 @@
     flex-direction: column;
     background: white;
     border-radius: 10px;
-    animation: 1s ease-out moveInUp;
+    animation: .5s ease-out moveInUp;
 
-    .mat-button-toggle {
-      width: 100%;
-      ::ng-deep .mat-button-toggle-label-content {
-        line-height: 2rem;
+    mat-button-toggle-group {
+      margin-bottom: 1rem;
+      .mat-button-toggle {
+        width: 100%;
+        //::ng-deep .mat-button-toggle-label-content {
+        //  line-height: 2rem;
+        //}
       }
     }
 
-    mat-form-field {
-      margin: 1rem 0;
-    }
+
+    //mat-form-field {
+    //  margin: 1rem 0;
+    //}
   }
 }

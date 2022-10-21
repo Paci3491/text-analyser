@@ -2,7 +2,7 @@
 
 <div class="analyser-container">
 
-  <form *ngIf="!resultShown" [formGroup]="analyserForm" class="analyser shadow">
+  <form *ngIf="!resultShown" [formGroup]="analyserForm" class="card shadow">
     <h1>Word Analyser</h1>
 
     <h3>Choose the analyser params</h3>
@@ -19,6 +19,7 @@
     <mat-form-field class="full-width" appearance="outline">
       <mat-label> Word Input </mat-label>
       <input matInput placeholder="Enter the word" formControlName="input" required>
+      <mat-error *ngIf="analyserForm.controls['input'].errors">Please enter English alphabet words only</mat-error>
     </mat-form-field>
 
     <button mat-raised-button
@@ -30,18 +31,21 @@
   </form>
 
 
-  <div *ngIf="resultShown">
+  <div *ngIf="resultShown" class="card shadow">
     <h1>Result</h1>
 
-    <h3>The given input was {{analyserForm.value.input}} with confiugration {{analyserForm.value.analyserLetterType}}</h3>
+    <h3 style="overflow-wrap: break-word; ">The given input was {{analyserForm.value.input}} with confiugration {{analyserForm.value.analyserLetterType}}</h3>
 
-    <div *ngFor="let item of analyserResult | keyvalue">
-      {{item.key}} : {{item.value}}
-    </div>
+    <ng-container *ngIf="!emptyAnalyserResult">
+      <div *ngFor="let item of analyserResult | keyvalue">
+        {{item.key}} : {{item.value}}
+      </div>
+    </ng-container>
+
+    <h3 *ngIf="emptyAnalyserResult"> No match with given parameters found </h3>
 
     <button mat-raised-button
             color="primary"
-            [disabled]="analyserForm.invalid"
             (click)="resultShown = !resultShown">
       Try Another Word
     </button>
