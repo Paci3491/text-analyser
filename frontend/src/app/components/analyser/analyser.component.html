@@ -1,6 +1,6 @@
 
 
-<div class="analyser-container">
+<div class="analyser-container flex-center">
 
   <form *ngIf="!resultShown" [formGroup]="analyserForm" class="card shadow">
     <h1>Word Analyser</h1>
@@ -38,8 +38,8 @@
 
 
     <mat-list role="list" *ngIf="!emptyAnalyserResult" >
-      <mat-list-item *ngFor="let item of analyserResult | keyvalue" role="listitem" class="space-between">
-        <span> {{item.key | titlecase}} </span>
+      <mat-list-item *ngFor="let item of analyserResult | keyvalue" role="listitem" class="flex-space-between">
+        <span> {{item.key | uppercase}} </span>
         <span> {{item.value}} </span>
       </mat-list-item>
     </mat-list>

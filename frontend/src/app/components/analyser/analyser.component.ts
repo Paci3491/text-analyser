@@ -45,7 +45,11 @@ export class AnalyserComponent implements OnInit {
 
   onReset() {
     this.resultShown = false;
-    this.analyserForm.reset();
+    this.analyserForm.reset({
+      analyserNetworkState: AnalyserNetworkStates.Offline,
+      analyserLetterType: AnalyserLetterTypes.Vowels,
+      input: null
+    });
   }
 
   get emptyAnalyserResult() {
