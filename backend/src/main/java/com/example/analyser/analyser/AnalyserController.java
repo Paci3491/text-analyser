@@ -1,13 +1,13 @@
 package com.example.analyser.analyser;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "api/v1/analyse")
 public class AnalyserController {
 
@@ -19,8 +19,8 @@ public class AnalyserController {
     }
 
     @GetMapping
-    public String analyse() {
-        return analyserService.analyse();
+    public HashMap<String, Integer> analyse(@RequestParam String letterType, @RequestParam String textInput) {
+        return analyserService.analyse(letterType, textInput);
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.analyser.analyser;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,54 +10,43 @@ import java.util.List;
 public class AnalyserService {
 
 
-    public String analyse() {
-        String inputType = "vowels";
-        String input = "Ahoj toto je string test";
-        char[] inputCharArr = input.toCharArray();
-//        ArrayList<string> inputCharList = inputCharArr.asList();
-        char[] vowels = {'a', 'e', 'i', 'o', 'u'};
-        System.out.println(inputCharArr);
+    public HashMap<String, Integer> analyse(String letterType, String textInput) {
+        char[] inputCharArr = textInput.replaceAll("\\s+","").toCharArray();
+        List<Character> vowels = Arrays.asList('a', 'e', 'i', 'o', 'u');
+        HashMap<String, Integer> result = new HashMap<>();
 
-
-        if (inputType.equals("vowels")) {
-
+        if (letterType.equals("vowels")) {
             for (int i = 0; i < inputCharArr.length; i++) {
-                System.out.println(inputCharArr[i]);
-//                if (vowels.contains(inputCharArr[i])) {
-//
-//                }
-            }
+                char currentInputChar = Character.toLowerCase(inputCharArr[i]);
+                if (vowels.contains(currentInputChar)) {
 
-        } else if (inputType.equals("consonants")) {
-            HashMap<String, Integer> consonants = new HashMap<>();
-            char[] chars = input.toCharArray();
-            for (int i = 0; i < chars.length; i++) {
-                if (chars[i] != 'a'
-                        && chars[i] != 'A'
-                        && chars[i] != 'e'
-                        && chars[i] != 'E'
-                        && chars[i] != 'i'
-                        && chars[i] != 'I'
-                        && chars[i] != 'o'
-                        && chars[i] != 'O'
-                        && chars[i] != 'u'
-                        && chars[i] != 'U'
-                ) {
-                    String stringCharacter = String.valueOf(chars[i]).toUpperCase();
-                    if (consonants.containsKey(stringCharacter)) {
-                        Integer num = consonants.get(stringCharacter);
+                    String stringCharacter = String.valueOf(currentInputChar);
+                    if (result.containsKey(stringCharacter)) {
+                        Integer num = result.get(stringCharacter);
                         num++;
-                        consonants.put(stringCharacter, num);
-                    } else{
-                        consonants.put(stringCharacter, 1);
+                        result.put(stringCharacter, num);
+                    } else {
+                        result.put(stringCharacter, 1);
                     }
                 }
             }
-            consonants.entrySet().forEach(entrySet -> {
-                System.out.println("Letter '" + entrySet.getKey() + "' appears " + entrySet.getValue() + " times");
-            });
+        } else if (letterType.equals("consonants")) {
+            for (int i = 0; i < inputCharArr.length; i++) {
+                char currentInputChar = Character.toLowerCase(inputCharArr[i]);
+                if (!vowels.contains(currentInputChar)) {
+
+                    String stringCharacter = String.valueOf(currentInputChar);
+                    if (result.containsKey(stringCharacter)) {
+                        Integer num = result.get(stringCharacter);
+                        num++;
+                        result.put(stringCharacter, num);
+                    } else {
+                        result.put(stringCharacter, 1);
+                    }
+                }
+            }
         }
-        return "Success";
+        return result;
     }
 }
 
