@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
-export interface OfflineAnalysisOutput {
+export interface AnalysisOutput {
   [key: string]: number
 }
 
@@ -17,15 +17,15 @@ export class AnalyserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  onlineAnalysis(letterType: AnalyserLetterTypes, textInput: string): Observable<any> {
+  onlineAnalysis(letterType: AnalyserLetterTypes, textInput: string): Observable<AnalysisOutput> {
     const params = {letterType, textInput};
-    return this.httpClient.get<any>(`${environment.baseUrl}/api/v1/analyse`, {params})
+    return this.httpClient.get<AnalysisOutput>(`${environment.baseUrl}/api/v1/analyse`, {params})
   }
-  
-  offlineAnalysis(letterType: AnalyserLetterTypes, input: string): OfflineAnalysisOutput {
-    const result: OfflineAnalysisOutput = {};
 
-    const trimmedInput = input.replace(/\s/g, '').toLowerCase();
+  offlineAnalysis(letterType: AnalyserLetterTypes, textInput: string): AnalysisOutput {
+    const result: AnalysisOutput = {};
+
+    const trimmedInput = textInput.replace(/\s/g, '').toLowerCase();
     const charArr = [...trimmedInput];
 
     charArr.forEach(char => {
@@ -41,12 +41,11 @@ export class AnalyserService {
     return result;
   }
 
-  createOrIncrementCharCount(result: OfflineAnalysisOutput, char: string): void {
+  createOrIncrementCharCount(result: AnalysisOutput, char: string): void {
     if (result.hasOwnProperty(char)) {
       result[char] += 1
     } else {
       result[char] = 1
     }
   }
-
 }

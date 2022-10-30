@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AnalyserService, OfflineAnalysisOutput} from '../../services/analyser.service';
+import {AnalyserService, AnalysisOutput} from '../../services/analyser.service';
 
 enum AnalyserNetworkStates {
   Online = 'online',
@@ -22,7 +22,7 @@ export class AnalyserComponent implements OnInit {
   analyserStates = AnalyserNetworkStates;
   analyserLetterTypes = AnalyserLetterTypes;
   resultShown = false;
-  analyserResult: OfflineAnalysisOutput = {};
+  analyserResult: AnalysisOutput = {};
 
   analyserForm: FormGroup;
 
@@ -44,17 +44,20 @@ export class AnalyserComponent implements OnInit {
     } else {
       this.analyserService.onlineAnalysis(form.analyserLetterType, form.input).subscribe(data => {
         console.log(data);
+        this.analyserResult = data;
+        this.resultShown = true
       });
     }
   }
 
   onReset() {
     this.resultShown = false;
-    this.analyserForm.reset({
-      analyserNetworkState: AnalyserNetworkStates.Offline,
-      analyserLetterType: AnalyserLetterTypes.Vowels,
-      input: null
-    });
+    this.analyserForm.controls['input'].setValue(null);
+    // this.analyserForm.reset({
+    //   analyserNetworkState: AnalyserNetworkStates.Offline,
+    //   analyserLetterType: AnalyserLetterTypes.Vowels,
+    //   input: null
+    // });
   }
 
   get emptyAnalyserResult() {
