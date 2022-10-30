@@ -9,11 +9,11 @@ import java.util.List;
 public class AnalyserService {
 
 
-    public String analyse(String[] args) {
+    public String analyse() {
         String inputType = "vowels";
         String input = "Ahoj toto je string test";
         char[] inputCharArr = input.toCharArray();
-        ArrayList<string> inputCharList = inputCharArr.asList();
+//        ArrayList<string> inputCharList = inputCharArr.asList();
         char[] vowels = {'a', 'e', 'i', 'o', 'u'};
         System.out.println(inputCharArr);
 
@@ -22,13 +22,12 @@ public class AnalyserService {
 
             for (int i = 0; i < inputCharArr.length; i++) {
                 System.out.println(inputCharArr[i]);
-                if (vowels.contains(inputCharArr[i])) {
-
-                }
+//                if (vowels.contains(inputCharArr[i])) {
+//
+//                }
             }
 
-        } else if (args[0].equals("consonants")) {
-            input = args[1];
+        } else if (inputType.equals("consonants")) {
             HashMap<String, Integer> consonants = new HashMap<>();
             char[] chars = input.toCharArray();
             for (int i = 0; i < chars.length; i++) {
