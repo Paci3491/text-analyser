@@ -34,13 +34,18 @@ export class AnalyserComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     const form = this.analyserForm.value;
-    this.analyserResult = this.analyserService.offlineAnalysis(form.analyserLetterType, form.input);
-    this.resultShown = true
+    if (form.analyserNetworkState === AnalyserNetworkStates.Offline) {
+      this.analyserResult = this.analyserService.offlineAnalysis(form.analyserLetterType, form.input);
+      this.resultShown = true
+    } else {
+      this.analyserService.onlineAnalysis(form.analyserLetterType, form.input).subscribe(data => {
+        console.log(data);
+      });
+    }
   }
 
   onReset() {

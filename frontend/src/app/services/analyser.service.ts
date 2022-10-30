@@ -1,5 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AnalyserLetterTypes} from '../components/analyser/analyser.component';
+import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 export interface OfflineAnalysisOutput {
   [key: string]: number
@@ -12,8 +15,13 @@ export class AnalyserService {
 
   VOWELS = ['a', 'e', 'i', 'o', 'u'];
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
+  onlineAnalysis(letterType: AnalyserLetterTypes, textInput: string): Observable<any> {
+    const params = {letterType, textInput};
+    return this.httpClient.get<any>(`${environment.baseUrl}/api/v1/analyse`, {params})
+  }
+  
   offlineAnalysis(letterType: AnalyserLetterTypes, input: string): OfflineAnalysisOutput {
     const result: OfflineAnalysisOutput = {};
 

@@ -11,6 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatListModule} from '@angular/material/list';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatListModule} from '@angular/material/list';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
