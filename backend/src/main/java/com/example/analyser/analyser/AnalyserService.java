@@ -1,7 +1,5 @@
 package com.example.analyser.analyser;
-
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +14,8 @@ public class AnalyserService {
         char[] inputCharArr = textInput.replaceAll("\\s+","").toCharArray();
         HashMap<String, Integer> result = new HashMap<>();
 
-        for (int i = 0; i < inputCharArr.length; i++) {
-            char currentInputChar = Character.toLowerCase(inputCharArr[i]);
+        for (char c : inputCharArr) {
+            char currentInputChar = Character.toLowerCase(c);
             String stringCharacter = String.valueOf(currentInputChar);
 
             if (letterType.equals("vowels") && this.VOWELS.contains(currentInputChar)) {
@@ -26,7 +24,6 @@ public class AnalyserService {
                 this.CreateOrIncrementCharCount(result, stringCharacter);
             }
         }
-
         return result;
     }
 
