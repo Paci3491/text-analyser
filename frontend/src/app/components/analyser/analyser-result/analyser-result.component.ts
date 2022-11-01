@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AnalysisOutput} from '../../../services/analyser.service';
 import {FormGroup} from '@angular/forms';
+import {AnalysisOutput} from '../analyser.models';
 
 @Component({
   selector: 'app-analyser-result',

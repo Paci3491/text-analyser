@@ -1,12 +1,9 @@
 import {Injectable} from '@angular/core';
-import {AnalyserLetterTypes} from '../components/analyser/analyser.component';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+import {AnalyserLetterTypes, AnalysisOutput} from '../components/analyser/analyser.models';
 
-export interface AnalysisOutput {
-  [key: string]: number
-}
 
 @Injectable({
   providedIn: 'root'

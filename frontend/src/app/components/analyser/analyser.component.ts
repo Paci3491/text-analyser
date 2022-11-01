@@ -1,22 +1,9 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AnalyserService, AnalysisOutput} from '../../services/analyser.service';
+import {AnalyserService} from '../../services/analyser.service';
 import {finalize} from 'rxjs';
+import {AnalyserLetterTypes, AnalyserNetworkStates, AnalyserViews, AnalysisOutput} from './analyser.models';
 
-export enum AnalyserNetworkStates {
-  Online = 'online',
-  Offline = 'offline'
-}
-
-export enum AnalyserLetterTypes {
-  Vowels = 'vowels',
-  Consonants = 'consonants'
-}
-
-export enum AnalyserViews {
-  Form = 'form',
-  Result = 'result'
-}
 
 @Component({
   selector: 'app-analyser',

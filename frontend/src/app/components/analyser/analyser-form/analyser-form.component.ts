@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {AnalyserLetterTypes, AnalyserNetworkStates} from '../analyser.component';
+import {AnalyserLetterTypes, AnalyserNetworkStates} from '../analyser.models';
 
 @Component({
   selector: 'app-analyser-form',
