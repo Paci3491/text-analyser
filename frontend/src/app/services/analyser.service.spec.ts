@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AnalyserService } from './analyser.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {AnalyserLetterTypes} from '../components/analyser/analyser.component';
+import {AnalyserLetterTypes} from '../components/analyser/analyser.models';
 
 describe('AnalyserService', () => {
   let service: AnalyserService;
@@ -13,10 +13,6 @@ describe('AnalyserService', () => {
       providers: [AnalyserService]
     });
     service = TestBed.inject(AnalyserService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
   });
 
   it('should analyse vowels', () => {

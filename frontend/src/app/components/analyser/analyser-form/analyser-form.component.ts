@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {AnalyserLetterTypes, AnalyserNetworkStates} from '../analyser.models';
 
@@ -7,7 +7,7 @@ import {AnalyserLetterTypes, AnalyserNetworkStates} from '../analyser.models';
   templateUrl: './analyser-form.component.html',
   styleUrls: ['./analyser-form.component.scss']
 })
-export class AnalyserFormComponent implements OnInit {
+export class AnalyserFormComponent {
   analyserStates = AnalyserNetworkStates;
   analyserLetterTypes = AnalyserLetterTypes;
   @Input() analyserForm!: FormGroup;
@@ -16,9 +16,7 @@ export class AnalyserFormComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
-
-  onSubmit() {
+  onSubmit(): void {
     this.analyse.emit()
   }
 }
