@@ -34,6 +34,10 @@ body {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
+.text-danger {
+  color: #d70000;
+}
+
 .flex-space-between {
   display: flex;
   justify-content: space-between;
@@ -58,13 +62,9 @@ body {
   animation: .5s ease-out moveInUp;
 }
 
-button {
+.button-primary {
   padding: 7px 16px;
 }
-//.mat-button-toggle-checked {
-//  background: $analyser-primary-blue;
-//  color: white !important;
-//}
 
 @keyframes moveInUp {
   0% {

@@ -1,8 +1,19 @@
 <div class="card shadow">
+
   <h1>Result</h1>
 
-  <h3 style="overflow-wrap: break-word; ">The given input was "{{analyserForm.value.input}}" with confiugration "{{analyserForm.value.analyserLetterType}}"</h3>
+  <div class="flex-space-between">
+    <span class="subtitle">Letter Config:</span>
+    <span>{{analyserForm.value.analyserLetterType}}</span>
+  </div>
 
+  <div class="flex-space-between">
+    <span class="subtitle">Network Config:</span>
+    <span>{{analyserForm.value.analyserNetworkState}}</span>
+  </div>
+
+  <span class="subtitle">Input:</span>
+  <p class="text-input">{{analyserForm.value.input}}</p>
 
   <mat-list role="list" *ngIf="!emptyAnalyserResult" >
     <mat-list-item *ngFor="let item of analyserResult | keyvalue" role="listitem" class="flex-space-between">
@@ -11,9 +22,13 @@
     </mat-list-item>
   </mat-list>
 
-  <h3 *ngIf="emptyAnalyserResult"> No match with given parameters found </h3>
+  <h3 *ngIf="emptyAnalyserResult"
+      class="text-danger">
+    No match with given parameters found
+  </h3>
 
   <button mat-raised-button
+          class="button-primary"
           color="primary"
           (click)="onReset()">
     Try Another Word

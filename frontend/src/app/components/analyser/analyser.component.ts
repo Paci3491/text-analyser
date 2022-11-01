@@ -52,6 +52,7 @@ export class AnalyserComponent {
 
   reset() {
     this.analyserForm.controls['input'].setValue(null);
+    this.analyserForm.controls['input'].markAsUntouched();
     this.analyserView = AnalyserViews.Form;
   }
 }

@@ -1,5 +1,14 @@
 @import 'src/styles.scss';
 
+.text-input {
+  overflow-wrap: break-word;
+}
+
+.subtitle {
+  font-weight: bold;
+  font-size: 14px;
+}
+
 mat-list {
   width: 100%;
   max-height: 27rem;

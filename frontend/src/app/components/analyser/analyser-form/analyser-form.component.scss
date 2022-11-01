@@ -7,8 +7,10 @@ mat-button-toggle-group {
 
   .mat-button-toggle {
     width: 100%;
-    //::ng-deep .mat-button-toggle-label-content {
-    //  line-height: 2rem;
-    //}
   }
+
+}
+
+button {
+  padding: 7px 16px;
 }
