@@ -1,0 +1,27 @@
+<form [formGroup]="analyserForm" class="card shadow">
+  <h1>Word Analyser</h1>
+
+  <h3>Choose the analyser params</h3>
+  <mat-button-toggle-group formControlName="analyserNetworkState">
+    <mat-button-toggle [value]="analyserStates.Offline"> Offline </mat-button-toggle>
+    <mat-button-toggle [value]="analyserStates.Online"> Online </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-button-toggle-group formControlName="analyserLetterType">
+    <mat-button-toggle [value]="analyserLetterTypes.Vowels"> Vowels </mat-button-toggle>
+    <mat-button-toggle [value]="analyserLetterTypes.Consonants"> Consonants </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label> Word Input </mat-label>
+    <input matInput placeholder="Enter the word" formControlName="input" required>
+    <mat-error *ngIf="analyserForm.controls['input'].errors">Please enter English alphabet words only</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button
+          color="primary"
+          [disabled]="analyserForm.invalid"
+          (click)="onSubmit()">
+    Analyse
+  </button>
+</form>

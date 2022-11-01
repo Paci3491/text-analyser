@@ -13,7 +13,7 @@ export interface AnalysisOutput {
 })
 export class AnalyserService {
 
-  VOWELS = ['a', 'e', 'i', 'o', 'u'];
+  private VOWELS = ['a', 'e', 'i', 'o', 'u'];
 
   constructor(private httpClient: HttpClient) { }
 
@@ -41,7 +41,7 @@ export class AnalyserService {
     return result;
   }
 
-  createOrIncrementCharCount(result: AnalysisOutput, char: string): void {
+  private createOrIncrementCharCount(result: AnalysisOutput, char: string): void {
     if (result.hasOwnProperty(char)) {
       result[char] += 1
     } else {

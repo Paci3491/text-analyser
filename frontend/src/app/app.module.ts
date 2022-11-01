@@ -12,11 +12,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatListModule} from '@angular/material/list';
 import {HttpClientModule} from '@angular/common/http';
+import { AnalyserFormComponent } from './components/analyser/analyser-form/analyser-form.component';
+import { AnalyserResultComponent } from './components/analyser/analyser-result/analyser-result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnalyserComponent
+    AnalyserComponent,
+    AnalyserFormComponent,
+    AnalyserResultComponent
   ],
   imports: [
     BrowserAnimationsModule,

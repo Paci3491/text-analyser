@@ -1,56 +1,21 @@
-
-
 <div class="analyser-container flex-center">
 
-  <form *ngIf="!resultShown" [formGroup]="analyserForm" class="card shadow">
-    <h1>Word Analyser</h1>
+  <ng-container [ngSwitch]="analyserView">
 
-    <h3>Choose the analyser params</h3>
-    <mat-button-toggle-group formControlName="analyserNetworkState">
-      <mat-button-toggle [value]="analyserStates.Offline"> Offline </mat-button-toggle>
-      <mat-button-toggle [value]="analyserStates.Online"> Online </mat-button-toggle>
-    </mat-button-toggle-group>
+    <ng-container *ngSwitchCase="analyserViews.Form">
+      <app-analyser-form
+        [analyserForm]="analyserForm"
+        (analyse)="analyse()">
+      </app-analyser-form>
+    </ng-container>
 
-    <mat-button-toggle-group formControlName="analyserLetterType">
-      <mat-button-toggle [value]="analyserLetterTypes.Vowels"> Vowels </mat-button-toggle>
-      <mat-button-toggle [value]="analyserLetterTypes.Consonants"> Consonants </mat-button-toggle>
-    </mat-button-toggle-group>
+    <ng-container *ngSwitchCase="analyserViews.Result">
+      <app-analyser-result
+        [analyserForm]="analyserForm"
+        [analyserResult]="analyserResult"
+        (reset)="reset()">
+      </app-analyser-result>
+    </ng-container>
 
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label> Word Input </mat-label>
-      <input matInput placeholder="Enter the word" formControlName="input" required>
-      <mat-error *ngIf="analyserForm.controls['input'].errors">Please enter English alphabet words only</mat-error>
-    </mat-form-field>
-
-    <button mat-raised-button
-            color="primary"
-            [disabled]="analyserForm.invalid"
-            (click)="onSubmit()">
-      Analyse
-    </button>
-  </form>
-
-
-  <div *ngIf="resultShown" class="card shadow">
-    <h1>Result</h1>
-
-    <h3 style="overflow-wrap: break-word; ">The given input was "{{analyserForm.value.input}}" with confiugration "{{analyserForm.value.analyserLetterType}}"</h3>
-
-
-    <mat-list role="list" *ngIf="!emptyAnalyserResult" >
-      <mat-list-item *ngFor="let item of analyserResult | keyvalue" role="listitem" class="flex-space-between">
-        <span> {{item.key | uppercase}} </span>
-        <span> {{item.value}} </span>
-      </mat-list-item>
-    </mat-list>
-
-    <h3 *ngIf="emptyAnalyserResult"> No match with given parameters found </h3>
-
-    <button mat-raised-button
-            color="primary"
-            (click)="onReset()">
-      Try Another Word
-    </button>
-  </div>
-
+  </ng-container>
 </div>

@@ -7,7 +7,7 @@ import java.util.List;
 @Service
 public class AnalyserService {
 
-    List<Character> VOWELS = Arrays.asList('a', 'e', 'i', 'o', 'u');
+    private List<Character> VOWELS = Arrays.asList('a', 'e', 'i', 'o', 'u');
 
     public HashMap<String, Integer> analyse(String letterType, String textInput) {
 

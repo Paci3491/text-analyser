@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnalyserService, AnalysisOutput} from '../../services/analyser.service';
 
-enum AnalyserNetworkStates {
+export enum AnalyserNetworkStates {
   Online = 'online',
   Offline = 'offline'
 }
@@ -12,18 +12,21 @@ export enum AnalyserLetterTypes {
   Consonants = 'consonants'
 }
 
+export enum AnalyserViews {
+  Form = 'form',
+  Result = 'result'
+}
+
 @Component({
   selector: 'app-analyser',
   templateUrl: './analyser.component.html',
   styleUrls: ['./analyser.component.scss']
 })
-export class AnalyserComponent implements OnInit {
+export class AnalyserComponent {
 
-  analyserStates = AnalyserNetworkStates;
-  analyserLetterTypes = AnalyserLetterTypes;
-  resultShown = false;
   analyserResult: AnalysisOutput = {};
-
+  analyserViews = AnalyserViews;
+  analyserView = AnalyserViews.Form;
   analyserForm: FormGroup;
 
   constructor(private analyserService: AnalyserService) {
@@ -34,33 +37,21 @@ export class AnalyserComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {}
-
-  onSubmit() {
+  analyse() {
     const form = this.analyserForm.value;
+
     if (form.analyserNetworkState === AnalyserNetworkStates.Offline) {
       this.analyserResult = this.analyserService.offlineAnalysis(form.analyserLetterType, form.input);
-      this.resultShown = true
     } else {
       this.analyserService.onlineAnalysis(form.analyserLetterType, form.input).subscribe(data => {
-        console.log(data);
         this.analyserResult = data;
-        this.resultShown = true
       });
     }
+    this.analyserView = AnalyserViews.Result;
   }
 
-  onReset() {
-    this.resultShown = false;
+  reset() {
     this.analyserForm.controls['input'].setValue(null);
-    // this.analyserForm.reset({
-    //   analyserNetworkState: AnalyserNetworkStates.Offline,
-    //   analyserLetterType: AnalyserLetterTypes.Vowels,
-    //   input: null
-    // });
-  }
-
-  get emptyAnalyserResult() {
-    return Object.keys(this.analyserResult).length < 1
+    this.analyserView = AnalyserViews.Form;
   }
 }
