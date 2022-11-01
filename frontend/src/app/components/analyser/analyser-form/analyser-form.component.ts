@@ -11,6 +11,7 @@ export class AnalyserFormComponent implements OnInit {
   analyserStates = AnalyserNetworkStates;
   analyserLetterTypes = AnalyserLetterTypes;
   @Input() analyserForm!: FormGroup;
+  @Input() isLoading = false;
   @Output() analyse = new EventEmitter<void>();
 
   constructor() { }

@@ -20,7 +20,7 @@
 
   <button mat-raised-button
           color="primary"
-          [disabled]="analyserForm.invalid"
+          [disabled]="analyserForm.invalid || isLoading"
           (click)="onSubmit()">
     Analyse
   </button>

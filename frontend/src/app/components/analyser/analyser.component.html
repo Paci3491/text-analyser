@@ -1,9 +1,12 @@
+<mat-progress-bar id="loader" *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
 <div class="analyser-container flex-center">
 
   <ng-container [ngSwitch]="analyserView">
 
     <ng-container *ngSwitchCase="analyserViews.Form">
       <app-analyser-form
+        [isLoading]="isLoading"
         [analyserForm]="analyserForm"
         (analyse)="analyse()">
       </app-analyser-form>

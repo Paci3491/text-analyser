@@ -14,6 +14,7 @@ import {MatListModule} from '@angular/material/list';
 import {HttpClientModule} from '@angular/common/http';
 import { AnalyserFormComponent } from './components/analyser/analyser-form/analyser-form.component';
 import { AnalyserResultComponent } from './components/analyser/analyser-result/analyser-result.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AnalyserResultComponent } from './components/analyser/analyser-result/a
     FormsModule,
     ReactiveFormsModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

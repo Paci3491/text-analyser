@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnalyserService, AnalysisOutput} from '../../services/analyser.service';
+import {finalize} from 'rxjs';
 
 export enum AnalyserNetworkStates {
   Online = 'online',
@@ -24,6 +25,7 @@ export enum AnalyserViews {
 })
 export class AnalyserComponent {
 
+  isLoading = false;
   analyserResult: AnalysisOutput = {};
   analyserViews = AnalyserViews;
   analyserView = AnalyserViews.Form;
@@ -42,12 +44,16 @@ export class AnalyserComponent {
 
     if (form.analyserNetworkState === AnalyserNetworkStates.Offline) {
       this.analyserResult = this.analyserService.offlineAnalysis(form.analyserLetterType, form.input);
+      this.analyserView = AnalyserViews.Result;
     } else {
-      this.analyserService.onlineAnalysis(form.analyserLetterType, form.input).subscribe(data => {
-        this.analyserResult = data;
+      this.isLoading = true;
+      this.analyserService.onlineAnalysis(form.analyserLetterType, form.input)
+        .pipe(finalize(() => this.isLoading = false))
+        .subscribe(data => {
+          this.analyserResult = data;
+          this.analyserView = AnalyserViews.Result;
       });
     }
-    this.analyserView = AnalyserViews.Result;
   }
 
   reset() {
