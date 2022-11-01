@@ -41,7 +41,7 @@ export class AnalyserService {
     return result;
   }
 
-  private createOrIncrementCharCount(result: AnalysisOutput, char: string): void {
+  createOrIncrementCharCount(result: AnalysisOutput, char: string): void {
     if (result.hasOwnProperty(char)) {
       result[char] += 1
     } else {
