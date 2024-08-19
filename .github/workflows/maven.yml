@@ -30,3 +30,23 @@ jobs:
     - name: Build with Maven
       working-directory: ./backend
       run: mvn -B package --file pom.xml
+      
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install Dependencies
+      working-directory: ./.frontend
+      run: npm install
+
+    - name: Build Angular Project
+      working-directory: ./.frontend
+      run: npm run build -- --prod
+
+    - name: Run Tests
+      working-directory: ./.frontend
+      run: npm test
